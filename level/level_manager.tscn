@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://sound/ambience/amb_forest.wav" type="AudioStream" id=1]
+[ext_resource path="res://player/main/res/scripts/camera.gd" type="Script" id=4]
+[ext_resource path="res://level/level_new.gd" type="Script" id=6]
+[ext_resource path="res://player/main/misc/save_system.gd" type="Script" id=9]
+[ext_resource path="res://player/main/player.tscn" type="PackedScene" id=10]
+[ext_resource path="res://level/level_res/script/crates.gd" type="Script" id=12]
+
+[node name="level_manager" type="Node2D"]
+
+[node name="level" type="Node2D" parent="."]
+script = ExtResource( 6 )
+
+[node name="fadelayer" type="CanvasLayer" parent="level"]
+layer = 2
+
+[node name="faderect" type="ColorRect" parent="level/fadelayer"]
+margin_left = -13.0
+margin_top = -10.0
+margin_right = 483.0
+margin_bottom = 274.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="camera" type="Camera2D" parent="." groups=["c", "cam"]]
+pause_mode = 2
+script = ExtResource( 4 )
+
+[node name="view" type="Camera2D" parent="camera"]
+current = true
+limit_smoothed = true
+smoothing_speed = 3.0
+
+[node name="ambience" type="AudioStreamPlayer2D" parent="camera"]
+position = Vector2( 0, 9 )
+stream = ExtResource( 1 )
+volume_db = 10.0
+autoplay = true
+
+[node name="crates" type="Node2D" parent="."]
+script = ExtResource( 12 )
+
+[node name="player" parent="." instance=ExtResource( 10 )]
+__meta__ = {
+"_editor_description_": "I CANT FUCKING FIGURE OUT HOW TO MAKE IT FLOAT TO THE WATER SURFACE.
+(nvm made it)"
+}
+
+[node name="save_system" type="Node2D" parent="."]
+script = ExtResource( 9 )

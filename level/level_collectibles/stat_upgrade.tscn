@@ -1,0 +1,78 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://level/level_collectibles/scripts/stat_upgrade.gd" type="Script" id=1]
+[ext_resource path="res://art/effects_art/general/circ.png" type="Texture" id=2]
+[ext_resource path="res://art/effects_art/general/bigcirc.png" type="Texture" id=3]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 1 ), 0.0, -1.0, 0, 1, Vector2( 1, 0 ), -1.0, 0.0, 1, 0 ]
+
+[node name="stat_upgrade" type="Sprite"]
+position = Vector2( 160, 90 )
+script = ExtResource( 1 )
+
+[node name="sprite_health" type="Sprite" parent="."]
+modulate = Color( 1, 0, 0, 1 )
+
+[node name="ball" type="Sprite" parent="sprite_health"]
+texture = ExtResource( 3 )
+
+[node name="particles" type="CPUParticles2D" parent="sprite_health"]
+amount = 16
+lifetime_randomness = 1.0
+local_coords = false
+texture = ExtResource( 2 )
+emission_shape = 1
+emission_sphere_radius = 16.0
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 64.0
+damping = 43.0
+scale_amount = 0.0
+scale_amount_random = 1.0
+scale_amount_curve = SubResource( 1 )
+
+[node name="sprite_magic" type="Sprite" parent="."]
+modulate = Color( 0, 1, 1, 1 )
+
+[node name="ball" type="Sprite" parent="sprite_magic"]
+texture = ExtResource( 3 )
+
+[node name="particles" type="CPUParticles2D" parent="sprite_magic"]
+amount = 16
+lifetime_randomness = 1.0
+local_coords = false
+texture = ExtResource( 2 )
+emission_shape = 1
+emission_sphere_radius = 16.0
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 64.0
+damping = 43.0
+scale_amount = 0.0
+scale_amount_random = 1.0
+scale_amount_curve = SubResource( 1 )
+
+[node name="sprite_damage" type="Sprite" parent="."]
+modulate = Color( 1, 1, 0, 1 )
+
+[node name="ball" type="Sprite" parent="sprite_damage"]
+texture = ExtResource( 3 )
+
+[node name="particles" type="CPUParticles2D" parent="sprite_damage"]
+amount = 16
+lifetime_randomness = 1.0
+local_coords = false
+texture = ExtResource( 2 )
+emission_shape = 1
+emission_sphere_radius = 16.0
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 64.0
+damping = 43.0
+scale_amount = 0.0
+scale_amount_random = 1.0
+scale_amount_curve = SubResource( 1 )
+
+[node name="whiteball" type="Sprite" parent="."]
+texture = ExtResource( 3 )

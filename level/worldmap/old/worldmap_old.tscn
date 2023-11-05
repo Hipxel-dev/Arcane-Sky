@@ -1,0 +1,365 @@
+[gd_scene load_steps=27 format=2]
+
+[ext_resource path="res://level/worldmap/old/worldmap.gd" type="Script" id=1]
+[ext_resource path="res://level/worldmap/old/wrld_node_old.tscn" type="PackedScene" id=2]
+[ext_resource path="res://art/player_art/ui_art/general_ui_art/shadowed_box.png" type="Texture" id=3]
+[ext_resource path="res://art/effects_art/general/light_gradient_small.png" type="Texture" id=4]
+[ext_resource path="res://art/picotron.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://art/level_art/mission_screen_art/screen1.png" type="Texture" id=6]
+[ext_resource path="res://player/main/misc/save_system.gd" type="Script" id=7]
+[ext_resource path="res://art/player_art/ui_art/general_ui_art/pixel.png" type="Texture" id=8]
+[ext_resource path="res://art/level_art/mission_screen_art/screen_decor.png" type="Texture" id=9]
+[ext_resource path="res://art/rainyedited.ttf" type="DynamicFontData" id=11]
+
+[sub_resource type="TileSet" id=15]
+0/name = "screen_decor.png 0"
+0/texture = ExtResource( 9 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 1, 0, 63, 67 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+1/name = "screen_decor.png 1"
+1/texture = ExtResource( 9 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 64, 1, 40, 47 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape_one_way = false
+1/shape_one_way_margin = 0.0
+1/shapes = [  ]
+1/z_index = 0
+
+[sub_resource type="DynamicFont" id=16]
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 11 )
+
+[sub_resource type="Gradient" id=17]
+colors = PoolColorArray( 0, 0, 0, 0, 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=18]
+gradient = SubResource( 17 )
+width = 200
+
+[sub_resource type="DynamicFont" id=19]
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 11 )
+
+[sub_resource type="DynamicFont" id=20]
+size = 8
+outline_size = 2
+outline_color = Color( 0.0235294, 0.0235294, 0.0941176, 1 )
+font_data = ExtResource( 5 )
+
+[sub_resource type="Shader" id=21]
+code = "shader_type canvas_item;
+
+uniform vec4 color_gap: hint_color = vec4(0.25);
+uniform vec4 color_stripe: hint_color = vec4(1.0, 0.75, 0.0, 1.0);
+uniform float divisions = 8.0; // increase for more stripe density
+uniform float stripe_bias = 2.5; // 1.0 means no stripes; 2.0 means stripes and gaps are equal size
+uniform float speed = 0.1;
+uniform float angle = 0.7854; // in radians
+
+void fragment() {
+	float w = cos(angle) * UV.x + sin(angle) * UV.y - speed * TIME;
+	if (floor(mod(w * divisions, stripe_bias)) < 0.0001) {
+		COLOR = color_gap;
+	} else {
+		COLOR = color_stripe;
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id=22]
+shader = SubResource( 21 )
+shader_param/color_gap = Color( 0, 0, 0, 1 )
+shader_param/color_stripe = Color( 0.164706, 0.180392, 0.223529, 1 )
+shader_param/divisions = 16.0
+shader_param/stripe_bias = 2.5
+shader_param/speed = 0.3
+shader_param/angle = 0.7854
+
+[sub_resource type="Gradient" id=2]
+colors = PoolColorArray( 0, 0, 0, 1, 0.0991678, 0.0886536, 0.136719, 1 )
+
+[sub_resource type="GradientTexture2D" id=3]
+gradient = SubResource( 2 )
+fill_from = Vector2( 1, 1 )
+fill_to = Vector2( 0.212963, 0.198148 )
+
+[sub_resource type="DynamicFont" id=14]
+size = 8
+font_data = ExtResource( 5 )
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.347087, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.677184, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=4]
+offsets = PoolRealArray( 0, 0.534091, 1 )
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="Shader" id=11]
+code = "shader_type canvas_item;
+
+uniform vec4 color_gap: hint_color = vec4(0.25);
+uniform vec4 color_stripe: hint_color = vec4(1.0, 0.75, 0.0, 1.0);
+uniform float divisions = 8.0; // increase for more stripe density
+uniform float stripe_bias = 2.5; // 1.0 means no stripes; 2.0 means stripes and gaps are equal size
+uniform float speed = 0.1;
+uniform float angle = 0.7854; // in radians
+
+void fragment() {
+	float w = cos(angle) * UV.x + sin(angle) * UV.y - speed * TIME;
+	if (floor(mod(w * divisions, stripe_bias)) < 0.0001) {
+		COLOR = color_gap;
+	} else {
+		COLOR = color_stripe;
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id=12]
+shader = SubResource( 11 )
+shader_param/color_gap = Color( 0, 0, 0, 0 )
+shader_param/color_stripe = Color( 0.113725, 0.121569, 0.137255, 1 )
+shader_param/divisions = 8.0
+shader_param/stripe_bias = 2.0
+shader_param/speed = 0.15
+shader_param/angle = 0.7854
+
+[sub_resource type="Environment" id=13]
+background_mode = 4
+glow_intensity = 1.0
+glow_strength = 1.1
+glow_bloom = 0.1
+adjustment_enabled = true
+adjustment_contrast = 1.2
+adjustment_saturation = 1.2
+
+[node name="worldmap" type="Node2D"]
+pause_mode = 2
+script = ExtResource( 1 )
+
+[node name="world_canvas" type="Node2D" parent="."]
+
+[node name="screens" type="Sprite" parent="world_canvas"]
+show_behind_parent = true
+
+[node name="sc_1" type="Sprite" parent="world_canvas/screens"]
+modulate = Color( 0.588235, 0.588235, 1, 1 )
+show_behind_parent = true
+texture = ExtResource( 6 )
+
+[node name="decor" type="TileMap" parent="world_canvas/screens/sc_1"]
+tile_set = SubResource( 15 )
+cell_size = Vector2( 6, 6 )
+format = 1
+tile_data = PoolIntArray( -1572828, 1, 0, -1441760, 1, 0, -1376220, 0, 0, -1245203, 0, 0, 1114097, 1, 0, 1179628, 0, 0, 1114121, 1, 0, 1376235, 1, 0 )
+
+[node name="sc_2" type="Sprite" parent="world_canvas/screens/sc_1"]
+modulate = Color( 0, 0, 0, 1 )
+show_behind_parent = true
+position = Vector2( 7, 7 )
+texture = ExtResource( 6 )
+
+[node name="world_node" parent="world_canvas" instance=ExtResource( 2 )]
+position = Vector2( -197, 37 )
+
+[node name="world_node2" parent="world_canvas/world_node" instance=ExtResource( 2 )]
+position = Vector2( 32, -26 )
+node_name = "Abandoned Abode"
+
+[node name="world_node3" parent="world_canvas/world_node/world_node2" instance=ExtResource( 2 )]
+position = Vector2( 79, -3 )
+
+[node name="world_node4" parent="world_canvas/world_node/world_node2/world_node3" instance=ExtResource( 2 )]
+position = Vector2( 145, -40 )
+
+[node name="world_node5" parent="world_canvas/world_node/world_node2/world_node3" instance=ExtResource( 2 )]
+position = Vector2( 157, -82 )
+
+[node name="world_node6" parent="world_canvas/world_node/world_node2/world_node3/world_node5" instance=ExtResource( 2 )]
+position = Vector2( 158, -30 )
+
+[node name="world_node7" parent="world_canvas/world_node/world_node2/world_node3/world_node5/world_node6" instance=ExtResource( 2 )]
+position = Vector2( -71, 129 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+
+[node name="ui" type="CanvasLayer" parent="Camera2D"]
+layer = 3
+
+[node name="location_text" type="Label" parent="Camera2D/ui"]
+margin_left = 2.0
+margin_top = 25.0
+margin_right = 480.0
+margin_bottom = 40.0
+custom_colors/font_color_shadow = Color( 0.152941, 0.152941, 0.152941, 1 )
+custom_fonts/font = SubResource( 16 )
+text = "The Green Path"
+align = 1
+
+[node name="line" type="Sprite" parent="Camera2D/ui/location_text"]
+position = Vector2( 308.333, 17 )
+scale = Vector2( 137.667, 1 )
+texture = ExtResource( 8 )
+
+[node name="select_node_ui" type="Node2D" parent="Camera2D/ui"]
+position = Vector2( 239, 139 )
+
+[node name="gradient" type="Sprite" parent="Camera2D/ui/select_node_ui"]
+position = Vector2( 142, 136 )
+scale = Vector2( 1, 273 )
+texture = SubResource( 18 )
+
+[node name="level_name" type="Label" parent="Camera2D/ui/select_node_ui"]
+margin_left = 59.0
+margin_top = -114.0
+margin_right = 212.0
+margin_bottom = -98.0
+custom_fonts/font = SubResource( 19 )
+text = "The glens"
+align = 2
+
+[node name="line" type="Sprite" parent="Camera2D/ui/select_node_ui/level_name"]
+position = Vector2( 156, 17 )
+scale = Vector2( 137.667, 1 )
+texture = ExtResource( 8 )
+
+[node name="level_desc" type="Label" parent="Camera2D/ui/select_node_ui"]
+margin_left = -210.0
+margin_top = -124.0
+margin_right = 147.0
+margin_bottom = 108.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 20 )
+text = "Once a thriving haven. Now a breeding ground for aliens"
+valign = 2
+
+[node name="fade" type="ColorRect" parent="Camera2D/ui"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = -151.0
+margin_top = -94.0
+margin_right = 671.0
+margin_bottom = 366.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="selection_box" type="Sprite" parent="."]
+z_index = 1
+
+[node name="rect" type="NinePatchRect" parent="selection_box"]
+margin_left = -47.0
+margin_top = -81.0
+margin_right = 50.0
+margin_bottom = -26.0
+rect_pivot_offset = Vector2( 47, 32 )
+rect_clip_content = true
+texture = ExtResource( 3 )
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="Sprite" type="Sprite" parent="selection_box/rect"]
+show_behind_parent = true
+material = SubResource( 22 )
+position = Vector2( 97, 56 )
+scale = Vector2( 100, 100 )
+texture = ExtResource( 8 )
+
+[node name="rect_unmasked" type="NinePatchRect" parent="selection_box"]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = -47.0
+margin_top = -81.0
+margin_right = 50.0
+margin_bottom = -26.0
+texture = ExtResource( 3 )
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="gradient" type="Sprite" parent="selection_box/rect_unmasked"]
+show_behind_parent = true
+light_mask = 0
+position = Vector2( 48.5, 60.5 )
+scale = Vector2( 1.48438, 0.140625 )
+texture = SubResource( 3 )
+
+[node name="Label" type="Label" parent="selection_box/rect_unmasked"]
+margin_left = 2.0
+margin_top = 57.0
+margin_right = 47.0
+margin_bottom = 71.0
+custom_fonts/font = SubResource( 14 )
+text = "The Glens"
+
+[node name="particles" type="CPUParticles2D" parent="."]
+lifetime = 3.0
+lifetime_randomness = 1.0
+texture = ExtResource( 4 )
+emission_shape = 2
+emission_rect_extents = Vector2( 160, 90 )
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 60.0
+initial_velocity_random = 1.0
+orbit_velocity = 0.1
+orbit_velocity_random = 1.0
+tangential_accel = 50.0
+tangential_accel_random = 1.0
+scale_amount = 0.1
+scale_amount_random = 0.1
+scale_amount_curve = SubResource( 1 )
+color = Color( 1, 0.992157, 0, 1 )
+color_ramp = SubResource( 4 )
+
+[node name="prlx" type="ParallaxBackground" parent="."]
+layer = -3
+follow_viewport_scale = 0.3
+
+[node name="ColorRect" type="Sprite" parent="prlx"]
+material = SubResource( 12 )
+position = Vector2( 468, 365 )
+scale = Vector2( 150.426, 150.426 )
+texture = ExtResource( 8 )
+region_enabled = true
+region_rect = Rect2( 30.5568, 20.2728, 24.774, 20.7613 )
+
+[node name="particles" type="CPUParticles2D" parent="prlx/ColorRect"]
+position = Vector2( -1.5157, -1.50905 )
+scale = Vector2( 0.00664781, 0.00664781 )
+z_index = 3
+amount = 16
+speed_scale = 0.3
+texture = ExtResource( 8 )
+emission_shape = 2
+emission_rect_extents = Vector2( 240, 135 )
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 64.0
+initial_velocity_random = 1.0
+angular_velocity = 720.0
+angular_velocity_random = 1.0
+scale_amount = 32.0
+scale_amount_random = 1.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 13 )
+
+[node name="ref" type="Node2D" parent="."]
+script = ExtResource( 7 )

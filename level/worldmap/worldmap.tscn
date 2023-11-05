@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://level/worldmap/scripts/levelnode.gd" type="Script" id=1]
+
+[node name="worldmap" type="Node2D"]
+
+[node name="cam" type="Camera2D" parent="."]
+
+[node name="level_forest" type="Node2D" parent="."]
+
+[node name="levelnode" type="Area2D" parent="level_forest"]
+position = Vector2( -132, -74 )
+script = ExtResource( 1 )

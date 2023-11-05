@@ -1,0 +1,406 @@
+[gd_scene load_steps=28 format=2]
+
+[ext_resource path="res://level/forest/systems/tilemap.gd" type="Script" id=1]
+[ext_resource path="res://art/level_art/debugtile.png" type="Texture" id=2]
+[ext_resource path="res://level/level_res/core.tscn" type="PackedScene" id=5]
+[ext_resource path="res://player/weapons/shooty_weapons/wpn_shotgun.tscn" type="PackedScene" id=6]
+[ext_resource path="res://level/level_res/camera_limit.tscn" type="PackedScene" id=7]
+[ext_resource path="res://player/weapons/shooty_weapons/wpn_ak_47.tscn" type="PackedScene" id=8]
+[ext_resource path="res://art/level_art/grass_placeholder.png" type="Texture" id=9]
+[ext_resource path="res://level/forest/systems/sunrays.gd" type="Script" id=10]
+[ext_resource path="res://player/weapons/shooty_weapons/wpn_energy_rifle.tscn" type="PackedScene" id=11]
+[ext_resource path="res://level/forest/systems/grass_generation.gd" type="Script" id=12]
+[ext_resource path="res://player/weapons/shooty_weapons/wpn_deagle.tscn" type="PackedScene" id=13]
+[ext_resource path="res://level/level_res/butterflies.tscn" type="PackedScene" id=15]
+[ext_resource path="res://level/level_res/script/game_mode_system.gd" type="Script" id=16]
+[ext_resource path="res://art/picotron.ttf" type="DynamicFontData" id=17]
+[ext_resource path="res://level/level_res/script/opening_system.gd" type="Script" id=18]
+[ext_resource path="res://art/player_art/ui_art/general_ui_art/pixel.png" type="Texture" id=19]
+[ext_resource path="res://art/player_art/ui_art/general_ui_art/diamond.png" type="Texture" id=20]
+
+[sub_resource type="TileSet" id=79]
+0/name = "grass_placeholder.png 0"
+0/texture = ExtResource( 9 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 16, 16 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+
+[sub_resource type="Gradient" id=78]
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture" id=82]
+gradient = SubResource( 78 )
+width = 700
+
+[sub_resource type="ConvexPolygonShape2D" id=1]
+points = PoolVector2Array( 17, 17, 0, 17, 0, 0, 17, 0 )
+
+[sub_resource type="TileSet" id=2]
+0/name = "debugtile.png 0"
+0/texture = ExtResource( 2 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 22, 22 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape = SubResource( 1 )
+0/shape_one_way = false
+0/shape_one_way_margin = 1.0
+0/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 1 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+0/z_index = 0
+
+[sub_resource type="Environment" id=85]
+background_mode = 4
+glow_enabled = true
+glow_intensity = 1.0
+glow_strength = 1.1
+glow_bloom = 0.1
+adjustment_enabled = true
+adjustment_brightness = 1.2
+adjustment_contrast = 1.2
+adjustment_saturation = 1.2
+
+[sub_resource type="Animation" id=88]
+resource_name = "opening_ui_anim"
+length = 7.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1, 1.8, 4.2, 5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("stripe:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 1, 2.7, 4.5, 5 ),
+"transitions": PoolRealArray( 1, 0.5, 1, 0.5, 1 ),
+"update": 0,
+"values": [ Vector2( 443.021, 0.114187 ), Vector2( 500, 0 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.1, 1, 2.5, 4.1, 5 ),
+"transitions": PoolRealArray( 1, 0.1, 1, 1, 2.63902 ),
+"update": 0,
+"values": [ Vector2( 1.61172, 1 ), Vector2( 500, 1 ), Vector2( -500, 1 ), Vector2( -500, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite2:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.1, 1, 2.5, 4.1, 5 ),
+"transitions": PoolRealArray( 1, 0.1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -1.61172, 1 ), Vector2( -500, 1 ), Vector2( 500, 1 ), Vector2( 500, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("diamond:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.1, 3.7, 4.3, 6 ),
+"transitions": PoolRealArray( 0.5, 1, 2, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0, 360.0, -320.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("diamond2:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.1, 3.3, 4.5, 6 ),
+"transitions": PoolRealArray( 0.5, 1, 0.5, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0, 360.0, -320.0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("diamond3:rotation_degrees")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0.1, 2.8, 4.7, 6 ),
+"transitions": PoolRealArray( 0.5, 1, 0.5, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0, 360.0, -320.0 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("diamond:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 1, 4.5, 5.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("diamond2:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 1, 4.5, 5.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("diamond3:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 1, 4.5, 5.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Shader" id=87]
+code = "shader_type canvas_item;
+
+uniform vec4 color_gap: hint_color = vec4(0.25);
+uniform vec4 color_stripe: hint_color = vec4(1.0, 0.75, 0.0, 1.0);
+uniform float divisions = 8.0; // increase for more stripe density
+uniform float stripe_bias = 2.5; // 1.0 means no stripes; 2.0 means stripes and gaps are equal size
+uniform float speed = 0.1;
+uniform float angle = 0.7854; // in radians
+
+void fragment() {
+	float w = cos(angle) * UV.x + sin(angle) * UV.y - speed * TIME;
+	if (floor(mod(w * divisions, stripe_bias)) < 0.0001) {
+		COLOR = color_gap;
+	} else {
+		COLOR = color_stripe;
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id=89]
+shader = SubResource( 87 )
+shader_param/color_gap = Color( 0.25098, 0.25098, 0.25098, 0.501961 )
+shader_param/color_stripe = Color( 0.141176, 0.843137, 0.843137, 1 )
+shader_param/divisions = 32.0
+shader_param/stripe_bias = 2.0
+shader_param/speed = 0.05
+shader_param/angle = 0.044
+
+[sub_resource type="DynamicFont" id=90]
+size = 8
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 17 )
+
+[node name="level_debug" type="Node2D"]
+
+[node name="lvl_fx" type="Node2D" parent="."]
+pause_mode = 2
+position = Vector2( 0, -1 )
+
+[node name="grass" type="Node2D" parent="lvl_fx"]
+modulate = Color( 0.498039, 0.498039, 1, 1 )
+script = ExtResource( 12 )
+
+[node name="grass_tile" type="TileMap" parent="lvl_fx/grass"]
+tile_set = SubResource( 79 )
+cell_size = Vector2( 3, 3 )
+format = 1
+tile_data = PoolIntArray( 14614779, 536870912, 0, 14614780, 536870912, 0, 14614781, 536870912, 0, 14614782, 536870912, 0, 14680308, 536870912, 0, 14680309, 536870912, 0, 14680310, 536870912, 0, 14680311, 536870912, 0, 14680312, 536870912, 0, 14680313, 536870912, 0, 14680314, 536870912, 0, 14745840, 536870912, 0, 14745841, 536870912, 0, 14745842, 536870912, 0, 14745843, 536870912, 0 )
+
+[node name="sunrays" type="Node2D" parent="lvl_fx"]
+modulate = Color( 1, 1, 1, 0.360784 )
+script = ExtResource( 10 )
+
+[node name="sunray" type="Sprite" parent="lvl_fx/sunrays" groups=["ray"]]
+position = Vector2( 696.856, 142.109 )
+rotation = -1.0472
+scale = Vector2( 1, 32 )
+texture = SubResource( 82 )
+
+[node name="particles" type="Node2D" parent="lvl_fx"]
+
+[node name="butterflies" type="Node2D" parent="lvl_fx"]
+
+[node name="butterflies" parent="lvl_fx/butterflies" instance=ExtResource( 15 )]
+position = Vector2( 858.5, 389.5 )
+frame = 2
+
+[node name="butterflies2" parent="lvl_fx/butterflies" instance=ExtResource( 15 )]
+position = Vector2( 858.5, 389.5 )
+frame = 2
+
+[node name="butterflies3" parent="lvl_fx/butterflies" instance=ExtResource( 15 )]
+position = Vector2( 858.5, 389.5 )
+
+[node name="butterflies27" parent="lvl_fx/butterflies" instance=ExtResource( 15 )]
+position = Vector2( 1024.5, 380.5 )
+frame = 2
+
+[node name="butterflies28" parent="lvl_fx/butterflies" instance=ExtResource( 15 )]
+position = Vector2( 1024.5, 380.5 )
+frame = 2
+
+[node name="butterflies29" parent="lvl_fx/butterflies" instance=ExtResource( 15 )]
+position = Vector2( 1024.5, 380.5 )
+frame = 2
+
+[node name="butterflies30" parent="lvl_fx/butterflies" instance=ExtResource( 15 )]
+position = Vector2( 1024.5, 380.5 )
+frame = 2
+
+[node name="tilemap" type="TileMap" parent="." groups=["level"]]
+modulate = Color( 0.588235, 0.588235, 1, 1 )
+z_index = 1
+tile_set = SubResource( 2 )
+cell_size = Vector2( 16, 16 )
+collision_layer = 7
+collision_mask = 7
+format = 1
+tile_data = PoolIntArray( 1507396, 0, 0, 1507397, 0, 0, 1507398, 0, 0, 1507399, 0, 0, 1507400, 0, 0, 1507401, 0, 0, 1507402, 0, 0, 1507403, 0, 0, 1572932, 0, 0, 1572939, 0, 0, 1638401, 0, 0, 1638402, 0, 0, 1638403, 0, 0, 1638404, 0, 0, 1638405, 0, 0, 1638406, 0, 0, 1638407, 0, 0, 1638468, 0, 0, 1638475, 0, 0, 1638476, 0, 0, 1638477, 0, 0, 1638478, 0, 0, 1638485, 0, 0, 1703937, 0, 0, 1703944, 0, 0, 1703945, 0, 0, 1703946, 0, 0, 1703947, 0, 0, 1703969, 0, 0, 1703970, 0, 0, 1704004, 0, 0, 1704014, 0, 0, 1704021, 0, 0, 1835000, 0, 0, 1835001, 0, 0, 1835002, 0, 0, 1835003, 0, 0, 1835004, 0, 0, 1835005, 0, 0, 1835006, 0, 0, 1835007, 0, 0, 1769472, 0, 0, 1769473, 0, 0, 1769483, 0, 0, 1769505, 0, 0, 1769506, 0, 0, 1769540, 0, 0, 1769550, 0, 0, 1769557, 0, 0, 1900536, 0, 0, 1835019, 0, 0, 1835030, 0, 0, 1835031, 0, 0, 1835032, 0, 0, 1835033, 0, 0, 1835034, 0, 0, 1835035, 0, 0, 1835036, 0, 0, 1835037, 0, 0, 1835038, 0, 0, 1835039, 0, 0, 1835040, 0, 0, 1835041, 0, 0, 1835042, 0, 0, 1835043, 0, 0, 1835044, 0, 0, 1835076, 0, 0, 1835086, 0, 0, 1835093, 0, 0, 1966059, 0, 0, 1966068, 0, 0, 1966069, 0, 0, 1966070, 0, 0, 1966071, 0, 0, 1966072, 0, 0, 1900555, 0, 0, 1900566, 0, 0, 1900580, 0, 0, 1900581, 0, 0, 1900582, 0, 0, 1900583, 0, 0, 1900612, 0, 0, 1900622, 0, 0, 1900629, 0, 0, 2031595, 0, 0, 2031602, 0, 0, 2031603, 0, 0, 2031604, 0, 0, 1966091, 0, 0, 1966092, 0, 0, 1966093, 0, 0, 1966094, 0, 0, 1966095, 0, 0, 1966096, 0, 0, 1966097, 0, 0, 1966098, 0, 0, 1966099, 0, 0, 1966100, 0, 0, 1966101, 0, 0, 1966102, 0, 0, 1966119, 0, 0, 1966120, 0, 0, 1966121, 0, 0, 1966122, 0, 0, 1966133, 0, 0, 1966134, 0, 0, 1966135, 0, 0, 1966136, 0, 0, 1966137, 0, 0, 1966138, 0, 0, 1966139, 0, 0, 1966140, 0, 0, 1966141, 0, 0, 1966142, 0, 0, 1966143, 0, 0, 1966144, 0, 0, 1966145, 0, 0, 1966146, 0, 0, 1966147, 0, 0, 1966148, 0, 0, 1966158, 0, 0, 1966159, 0, 0, 1966160, 0, 0, 1966161, 0, 0, 1966162, 0, 0, 1966163, 0, 0, 1966164, 0, 0, 1966165, 0, 0, 2097131, 0, 0, 2097138, 0, 0, 2031658, 0, 0, 2031659, 0, 0, 2031660, 0, 0, 2031661, 0, 0, 2031662, 0, 0, 2031663, 0, 0, 2031664, 0, 0, 2031665, 0, 0, 2031666, 0, 0, 2031667, 0, 0, 2031668, 0, 0, 2031669, 0, 0, 2162667, 0, 0, 2162674, 0, 0, 2097194, 0, 0, 2097195, 0, 0, 2097196, 0, 0, 2097197, 0, 0, 2097198, 0, 0, 2097199, 0, 0, 2097200, 0, 0, 2097201, 0, 0, 2097202, 0, 0, 2097203, 0, 0, 2097204, 0, 0, 2097205, 0, 0, 2228203, 0, 0, 2228210, 0, 0, 2162730, 0, 0, 2162731, 0, 0, 2162732, 0, 0, 2162733, 0, 0, 2162734, 0, 0, 2162735, 0, 0, 2162736, 0, 0, 2162737, 0, 0, 2162738, 0, 0, 2162739, 0, 0, 2162740, 0, 0, 2162741, 0, 0, 2293739, 0, 0, 2293746, 0, 0, 2359275, 0, 0, 2359282, 0, 0, 2424811, 0, 0, 2424818, 0, 0, 2490347, 0, 0, 2490354, 0, 0, 2555883, 0, 0, 2555890, 0, 0, 2621419, 0, 0, 2621426, 0, 0, 2686955, 0, 0, 2686962, 0, 0, 2752491, 0, 0, 2752492, 0, 0, 2752493, 0, 0, 2752494, 0, 0, 2752495, 0, 0, 2752496, 0, 0, 2752497, 0, 0, 2752498, 0, 0 )
+script = ExtResource( 1 )
+
+[node name="core" parent="tilemap" instance=ExtResource( 5 )]
+position = Vector2( 540, 373 )
+
+[node name="camera_limit" parent="." instance=ExtResource( 7 )]
+margin_left = -304.0
+margin_top = 120.0
+margin_right = 1359.0
+margin_bottom = 762.0
+
+[node name="spwn_pos" type="Node2D" parent="."]
+position = Vector2( 65, 376 )
+
+[node name="wpn_energy_rifle" parent="." instance=ExtResource( 11 )]
+position = Vector2( 158, 387 )
+
+[node name="wpn_ak_47" parent="." instance=ExtResource( 8 )]
+position = Vector2( 210, 401 )
+
+[node name="wpn_deagle" parent="." instance=ExtResource( 13 )]
+position = Vector2( 235, 429 )
+
+[node name="wpn_shotgun" parent="." instance=ExtResource( 6 )]
+position = Vector2( 286, 425 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 85 )
+
+[node name="game_mode_system" type="Node2D" parent="." groups=["game_mode"]]
+script = ExtResource( 16 )
+level_name = "The Glens"
+
+[node name="opening_system" type="Node2D" parent="."]
+pause_mode = 2
+script = ExtResource( 18 )
+
+[node name="opening_title" type="CanvasLayer" parent="opening_system"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="opening_system/opening_title"]
+autoplay = "opening_ui_anim"
+anims/opening_ui_anim = SubResource( 88 )
+
+[node name="diamond" type="Sprite" parent="opening_system/opening_title"]
+position = Vector2( 240, 94 )
+rotation = 4.53301
+texture = ExtResource( 20 )
+
+[node name="diamond2" type="Sprite" parent="opening_system/opening_title"]
+position = Vector2( 240, 94 )
+rotation = 4.9026
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 20 )
+
+[node name="diamond3" type="Sprite" parent="opening_system/opening_title"]
+position = Vector2( 240, 94 )
+rotation = 5.42129
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 20 )
+
+[node name="stripe" type="ColorRect" parent="opening_system/opening_title"]
+visible = false
+material = SubResource( 89 )
+margin_left = -7.0
+margin_top = 85.0
+margin_right = 488.0
+margin_bottom = 104.0
+rect_scale = Vector2( 140.858, 0.719723 )
+
+[node name="Label" type="Label" parent="opening_system/opening_title"]
+margin_left = 2.0
+margin_top = 90.0
+margin_right = 477.0
+margin_bottom = 155.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+custom_fonts/font = SubResource( 90 )
+text = "Insert Level Name Here"
+align = 1
+
+[node name="Sprite" type="Sprite" parent="opening_system/opening_title"]
+position = Vector2( -1, 86 )
+scale = Vector2( -499.51, 1 )
+texture = ExtResource( 19 )
+
+[node name="Sprite2" type="Sprite" parent="opening_system/opening_title/Sprite"]
+modulate = Color( 0, 0, 0, 1 )
+show_behind_parent = true
+position = Vector2( 0, 1 )
+texture = ExtResource( 19 )
+
+[node name="Sprite2" type="Sprite" parent="opening_system/opening_title"]
+position = Vector2( 481, 104 )
+scale = Vector2( 499.51, 1 )
+texture = ExtResource( 19 )
+
+[node name="Sprite2" type="Sprite" parent="opening_system/opening_title/Sprite2"]
+modulate = Color( 0, 0, 0, 1 )
+show_behind_parent = true
+position = Vector2( 0, 1 )
+texture = ExtResource( 19 )

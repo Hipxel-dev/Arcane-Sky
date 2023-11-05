@@ -1,0 +1,351 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://art/rainyedited.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://level/npc/layla_rig.tscn" type="PackedScene" id=2]
+[ext_resource path="res://level/npc/script/shop.gd" type="Script" id=3]
+[ext_resource path="res://art/npc_art/shop_art.png" type="Texture" id=4]
+[ext_resource path="res://art/npc_art/npc_layla.png" type="Texture" id=5]
+[ext_resource path="res://art/player_art/ui_art/shop_ui_art/resources.png" type="Texture" id=6]
+[ext_resource path="res://art/player_art/ui_art/general_ui_art/shadowed_box.png" type="Texture" id=7]
+[ext_resource path="res://level/npc/script/main_shop.gd" type="Script" id=8]
+[ext_resource path="res://level/npc/script/shopui.gd" type="Script" id=9]
+[ext_resource path="res://art/player_art/ui_art/shop_ui_art/upgrades.png" type="Texture" id=10]
+[ext_resource path="res://art/wendy.ttf" type="DynamicFontData" id=11]
+[ext_resource path="res://art/player_art/ui_art/shop_ui_art/buffs.png" type="Texture" id=12]
+[ext_resource path="res://level/npc/script/shop_resources.gd" type="Script" id=13]
+
+[sub_resource type="DynamicFont" id=1]
+outline_size = 5
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 10
+font_data = ExtResource( 11 )
+
+[node name="shop" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="sprite" type="Sprite" parent="."]
+texture = ExtResource( 5 )
+
+[node name="shop_sprite" type="Sprite" parent="."]
+position = Vector2( 64, -47 )
+texture = ExtResource( 4 )
+
+[node name="shopui" type="CanvasLayer" parent="."]
+layer = 5
+script = ExtResource( 9 )
+
+[node name="Node2D" type="Node2D" parent="shopui"]
+z_index = -2
+
+[node name="buy_ui" type="ColorRect" parent="shopui/Node2D"]
+margin_left = -20.0
+margin_top = -41.0
+margin_right = 322.0
+margin_bottom = 195.0
+color = Color( 0.0666667, 0.0627451, 0.101961, 1 )
+
+[node name="buy_ui2" type="ColorRect" parent="shopui/Node2D"]
+margin_left = -20.0
+margin_top = -2.0
+margin_right = 322.0
+margin_bottom = 39.0
+rect_rotation = -5.0
+color = Color( 0.101961, 0.0941176, 0.192157, 1 )
+
+[node name="buy_ui3" type="ColorRect" parent="shopui/Node2D"]
+margin_left = -19.0
+margin_top = 174.0
+margin_right = 323.0
+margin_bottom = 224.0
+rect_rotation = -5.0
+color = Color( 0.101961, 0.0941176, 0.192157, 1 )
+
+[node name="main_shop" type="Node2D" parent="shopui"]
+script = ExtResource( 8 )
+
+[node name="title_rect" type="ColorRect" parent="shopui/main_shop"]
+margin_left = -16.0
+margin_top = 26.0
+margin_right = 295.0
+margin_bottom = 39.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="title_text" type="RichTextLabel" parent="shopui/main_shop/title_rect"]
+modulate = Color( 100, 100, 100, 1 )
+margin_left = 37.0
+margin_top = -3.0
+margin_right = 235.0
+margin_bottom = 12.0
+rect_clip_content = false
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+bbcode_text = "[wave]I got anything you need..."
+text = "I got anything you need..."
+scroll_active = false
+
+[node name="ColorRect" type="ColorRect" parent="shopui/main_shop/title_rect"]
+margin_left = 15.0
+margin_top = 52.0
+margin_right = 336.0
+margin_bottom = 108.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="shopui/main_shop/title_rect"]
+margin_left = 313.0
+margin_right = 634.0
+margin_bottom = 13.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="select_fx" type="Node2D" parent="shopui/main_shop"]
+
+[node name="rect" type="ColorRect" parent="shopui/main_shop/select_fx"]
+modulate = Color( 1, 1, 1, 0.498039 )
+margin_left = -28.0
+margin_top = -31.0
+margin_right = 32.0
+margin_bottom = 38.0
+
+[node name="resources" type="Area2D" parent="shopui/main_shop"]
+position = Vector2( 32, 60 )
+
+[node name="rect" type="ColorRect" parent="shopui/main_shop/resources"]
+margin_left = -18.0
+margin_top = -19.0
+margin_right = 22.0
+margin_bottom = 21.0
+color = Color( 1, 0.607843, 0, 1 )
+
+[node name="sprite" type="Sprite" parent="shopui/main_shop/resources"]
+position = Vector2( 2, 1 )
+texture = ExtResource( 6 )
+
+[node name="outline" type="NinePatchRect" parent="shopui/main_shop/resources"]
+margin_left = -20.0
+margin_top = -21.0
+margin_right = 25.0
+margin_bottom = 24.0
+rect_pivot_offset = Vector2( 20, 21 )
+texture = ExtResource( 7 )
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="Label" type="Label" parent="shopui/main_shop/resources"]
+margin_left = -20.0
+margin_top = 25.0
+margin_right = 24.0
+margin_bottom = 39.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "Resources"
+align = 1
+
+[node name="upgrades" type="Area2D" parent="shopui/main_shop"]
+position = Vector2( 32, 60 )
+
+[node name="rect" type="ColorRect" parent="shopui/main_shop/upgrades"]
+margin_left = -18.0
+margin_top = -19.0
+margin_right = 22.0
+margin_bottom = 21.0
+color = Color( 0, 0.811765, 1, 1 )
+
+[node name="sprite" type="Sprite" parent="shopui/main_shop/upgrades"]
+position = Vector2( 2, 1 )
+texture = ExtResource( 10 )
+
+[node name="outline" type="NinePatchRect" parent="shopui/main_shop/upgrades"]
+margin_left = -20.0
+margin_top = -21.0
+margin_right = 25.0
+margin_bottom = 24.0
+rect_pivot_offset = Vector2( 20, 21 )
+texture = ExtResource( 7 )
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="Label" type="Label" parent="shopui/main_shop/upgrades"]
+margin_left = -20.0
+margin_top = 25.0
+margin_right = 24.0
+margin_bottom = 39.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "Upgrades"
+align = 1
+
+[node name="buffs" type="Area2D" parent="shopui/main_shop"]
+position = Vector2( 32, 60 )
+
+[node name="rect" type="ColorRect" parent="shopui/main_shop/buffs"]
+margin_left = -18.0
+margin_top = -19.0
+margin_right = 22.0
+margin_bottom = 21.0
+color = Color( 0, 1, 0.462745, 1 )
+
+[node name="sprite" type="Sprite" parent="shopui/main_shop/buffs"]
+position = Vector2( 2, 1 )
+texture = ExtResource( 12 )
+
+[node name="outline" type="NinePatchRect" parent="shopui/main_shop/buffs"]
+margin_left = -20.0
+margin_top = -21.0
+margin_right = 25.0
+margin_bottom = 24.0
+rect_pivot_offset = Vector2( 20, 21 )
+texture = ExtResource( 7 )
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="Label" type="Label" parent="shopui/main_shop/buffs"]
+margin_left = -20.0
+margin_top = 25.0
+margin_right = 24.0
+margin_bottom = 39.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "buffs"
+align = 1
+
+[node name="shop_resources" type="Node2D" parent="shopui"]
+script = ExtResource( 13 )
+
+[node name="select_fx" type="Node2D" parent="shopui/shop_resources"]
+
+[node name="rect" type="ColorRect" parent="shopui/shop_resources/select_fx"]
+modulate = Color( 1, 1, 1, 0.498039 )
+margin_left = -28.0
+margin_top = -31.0
+margin_right = 32.0
+margin_bottom = 38.0
+
+[node name="Area2D" type="Area2D" parent="shopui/shop_resources"]
+
+[node name="resources" type="Area2D" parent="shopui/shop_resources"]
+position = Vector2( 32, 60 )
+
+[node name="rect" type="ColorRect" parent="shopui/shop_resources/resources"]
+margin_left = -18.0
+margin_top = -19.0
+margin_right = 22.0
+margin_bottom = 21.0
+color = Color( 1, 0.607843, 0, 1 )
+
+[node name="sprite" type="Sprite" parent="shopui/shop_resources/resources"]
+position = Vector2( 2, 1 )
+texture = ExtResource( 6 )
+
+[node name="outline" type="NinePatchRect" parent="shopui/shop_resources/resources"]
+margin_left = -20.0
+margin_top = -21.0
+margin_right = 25.0
+margin_bottom = 24.0
+rect_pivot_offset = Vector2( 20, 21 )
+texture = ExtResource( 7 )
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="Label" type="Label" parent="shopui/shop_resources/resources"]
+margin_left = -20.0
+margin_top = 25.0
+margin_right = 24.0
+margin_bottom = 39.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "Resources"
+align = 1
+
+[node name="upgrades" type="Area2D" parent="shopui/shop_resources"]
+position = Vector2( 32, 60 )
+
+[node name="rect" type="ColorRect" parent="shopui/shop_resources/upgrades"]
+margin_left = -18.0
+margin_top = -19.0
+margin_right = 22.0
+margin_bottom = 21.0
+color = Color( 0, 0.811765, 1, 1 )
+
+[node name="sprite" type="Sprite" parent="shopui/shop_resources/upgrades"]
+position = Vector2( 2, 1 )
+texture = ExtResource( 10 )
+
+[node name="outline" type="NinePatchRect" parent="shopui/shop_resources/upgrades"]
+margin_left = -20.0
+margin_top = -21.0
+margin_right = 25.0
+margin_bottom = 24.0
+rect_pivot_offset = Vector2( 20, 21 )
+texture = ExtResource( 7 )
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="Label" type="Label" parent="shopui/shop_resources/upgrades"]
+margin_left = -20.0
+margin_top = 25.0
+margin_right = 24.0
+margin_bottom = 39.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "Upgrades"
+align = 1
+
+[node name="buffs" type="Area2D" parent="shopui/shop_resources"]
+position = Vector2( 32, 60 )
+
+[node name="rect" type="ColorRect" parent="shopui/shop_resources/buffs"]
+margin_left = -18.0
+margin_top = -19.0
+margin_right = 22.0
+margin_bottom = 21.0
+color = Color( 0, 1, 0.462745, 1 )
+
+[node name="sprite" type="Sprite" parent="shopui/shop_resources/buffs"]
+position = Vector2( 2, 1 )
+texture = ExtResource( 12 )
+
+[node name="outline" type="NinePatchRect" parent="shopui/shop_resources/buffs"]
+margin_left = -20.0
+margin_top = -21.0
+margin_right = 25.0
+margin_bottom = 24.0
+rect_pivot_offset = Vector2( 20, 21 )
+texture = ExtResource( 7 )
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="Label" type="Label" parent="shopui/shop_resources/buffs"]
+margin_left = -20.0
+margin_top = 25.0
+margin_right = 24.0
+margin_bottom = 39.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "buffs"
+align = 1
+
+[node name="shop_upgrades" type="Node2D" parent="shopui"]
+
+[node name="shop_buffs" type="Node2D" parent="shopui"]
+
+[node name="char" type="Sprite" parent="shopui"]
+
+[node name="Node2D" parent="shopui/char" instance=ExtResource( 2 )]
+position = Vector2( 288, 177 )
